@@ -1,54 +1,56 @@
-import React, { Component } from "react";
+import React, { useState } from "react";
 import "./App.css";
 import Person from "./Person/person";
 
-class App extends Component {
-  state = {
+const app = (props) => {
+  const [personsState, setPersons] = useState({
     persons: [
       { name: "Max", age: 28 },
       { name: "Manu", age: 29 },
       { name: "Stephanie", age: 26 },
     ],
+  });
 
-    otherState: "some other value",
-  };
+  const [otherState, setOtherState] = useState("some other value");
 
-  switchNameHandler = () => {
+  console.log(personsState, otherState);
+
+  const switchNameHandler = () => {
     // console.log("was clicked");
-    this.setState({
+    setPersons({
       persons: [
         { name: "Maximillion", age: 28 },
         { name: "Manuuuuuuu", age: 29 },
         { name: "Stephanie", age: 27 },
       ],
+      otherState: personsState.otherState,
     });
   };
 
-  render() {
-    return (
-      <div className="App">
-        <h1> Hi, Im a react app :)</h1>
-        <button onClick={this.switchNameHandler}>Switch Name</button>
+  return (
+    <div className="App">
+      <h1> Hi, Im a react app :)</h1>
+      <button onClick={switchNameHandler}>Switch Name</button>
 
-        <Person
-          name={this.state.persons[0].name}
-          age={this.state.persons[0].age}
-        />
+      <Person
+        name={personsState.persons[0].name}
+        name={personsState.persons[0].name}
+        age={personsState.persons[0].age}
+      />
 
-        <Person
-          name={this.state.persons[1].name}
-          age={this.state.persons[1].age}
-        >
-          My Hobbies: Racing
-        </Person>
+      <Person
+        name={personsState.persons[1].name}
+        age={personsState.persons[1].age}
+      >
+        My Hobbies: Racing
+      </Person>
 
-        <Person
-          name={this.state.persons[2].name}
-          age={this.state.persons[2].age}
-        />
-      </div>
-    );
-  }
-}
+      <Person
+        name={personsState.persons[2].name}
+        age={personsState.persons[2].age}
+      />
+    </div>
+  );
+};
 
-export default App;
+export default app;
